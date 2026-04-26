@@ -1,16 +1,18 @@
 # Visual Snow Shader
 
 My girlfriend [@onelitefeather](https://github.com/onelitefeather) has lived with VSS her
-whole life. She never got a formal diagnosis — not because she didn't seek one, but because
-VSS simply wasn't a recognized condition when her symptoms started. She wanted to show me
-what she sees every day. We needed a simulator. Minecraft with Iris shaders turned out to
-be the right fit — accessible, no friction, and you can just hand someone a controller and
-say "this is my vision."
+whole life. Back then, the only way to arrive at it was through exclusion — ruling out
+everything else until nothing was left. VSS had no official name in the diagnostic system,
+so there was nothing to formally diagnose. That changed in 2025 when VSS received its own
+ICD-11 code, which means doctors can now actually name it. She wanted to show me what she
+sees every day. We needed a simulator. Minecraft with Iris shaders turned out to be the
+right fit — accessible, no friction, and you can just hand someone a controller and say
+"this is my vision."
 
-That's where this started. Since a lot of people with VSS go undiagnosed for years (many
-don't even realize their vision is different), we decided to make this public. If it helps
-one person realize they're not imagining things, or helps someone understand what a person
-close to them experiences — that's the point.
+That's where this started. A lot of people with VSS still don't know they have it — they
+grew up with it and assumed everyone sees this way. If this helps one person realize they're
+not imagining things, or helps someone understand what a person close to them experiences
+every day — that's the point.
 
 [![Iris Compat](https://img.shields.io/badge/Iris-1.6%2B-blue)](https://irisshaders.dev/)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.19%2B-green)](https://minecraft.net/)
