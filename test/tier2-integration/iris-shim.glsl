@@ -1,13 +1,15 @@
 // Iris uniform shim — injected before each shader file during validation.
-// Covers the uniforms and varyings that Iris injects at runtime so
-// glslangValidator can resolve all symbols without a live Minecraft instance.
+// Only uniforms that Iris injects at runtime. Varyings (texcoord etc.) are
+// declared by the shader files themselves — do NOT redeclare them here.
 
-// ── Time ────────────────────────────────────────────────────────────────────
+#extension GL_GOOGLE_include_directive : enable
+
+// ── Time ─────────────────────────────────────────────────────────────────────
 uniform float frameTime;
 uniform float frameTimeCounter;
 uniform int   frameCounter;
 
-// ── Screen / projection ─────────────────────────────────────────────────────
+// ── Screen / projection ──────────────────────────────────────────────────────
 uniform vec2  viewSize;
 uniform vec2  texelSize;
 uniform mat4  gbufferProjection;
@@ -33,7 +35,7 @@ uniform int   worldTime;
 uniform int   worldDay;
 uniform int   moonPhase;
 
-// ── Textures (colortex0–7, depth, noise) ────────────────────────────────────
+// ── Textures ─────────────────────────────────────────────────────────────────
 uniform sampler2D colortex0;
 uniform sampler2D colortex1;
 uniform sampler2D colortex2;
@@ -49,11 +51,3 @@ uniform sampler2D noisetex;
 uniform sampler2D gtexture;
 uniform sampler2D lightmap;
 uniform sampler2D gaux1;
-
-// ── Per-fragment inputs (composite / final) ──────────────────────────────────
-in vec2 texcoord;
-
-// ── Per-vertex outputs (vertex shaders) ──────────────────────────────────────
-#ifdef VERTEX_STAGE
-out vec2 texcoord;
-#endif
