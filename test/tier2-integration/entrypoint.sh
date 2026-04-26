@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Tier-2 GLSL validation
-# Preprocesses #include directives inline (glslangValidator treats "/lib/foo"
-# as an absolute system path, not relative to -I), then validates each
-# .vsh/.fsh with glslangValidator after injecting the Iris uniform shim.
+# Preprocesses #include directives inline, strips shim uniforms that the
+# shader already declares itself (avoiding redefinition errors), then
+# validates each .vsh/.fsh with glslangValidator.
 set -euo pipefail
 
 SHADER_DIR="${1:-/shader-mount/shaders}"
@@ -12,9 +12,9 @@ FAIL=0
 ERRORS=""
 
 preprocess() {
-    # Inline all #include "/lib/..." directives relative to SHADER_DIR,
-    # strip the file's own #version line.
-    python3 - "$1" "$SHADER_DIR" <<'PY'
+    # Inlines #include "/lib/..." and removes shim uniforms already declared
+    # in the shader to avoid redefinition errors.
+    python3 - "$1" "$SHADER_DIR" "$SHIM" <<'PY'
 import sys, re, os
 
 def inline_includes(text, root, depth=0):
@@ -29,9 +29,25 @@ def inline_includes(text, root, depth=0):
             return f"// [shim] include not found: {path}"
     return re.sub(r'^\s*#include\s+"([^"]+)"', sub, text, flags=re.MULTILINE)
 
-src = open(sys.argv[1]).read()
+shader_file, shader_root, shim_file = sys.argv[1], sys.argv[2], sys.argv[3]
+
+src = open(shader_file).read()
 src = re.sub(r'^#version[^\n]*\n', '', src, flags=re.MULTILINE)
-print(inline_includes(src, sys.argv[2]))
+src_inlined = inline_includes(src, shader_root)
+
+# Names of uniforms the shader already declares
+declared = set(re.findall(r'uniform\s+\S+\s+(\w+)\s*;', src_inlined))
+
+# Filter shim: drop any uniform line whose name is already in the shader
+filtered = []
+for line in open(shim_file):
+    m = re.match(r'\s*uniform\s+\S+\s+(\w+)\s*;', line)
+    if m and m.group(1) in declared:
+        continue
+    filtered.append(line)
+
+sys.stdout.write(''.join(filtered))
+sys.stdout.write(src_inlined)
 PY
 }
 
@@ -44,7 +60,6 @@ validate() {
     {
         echo "#version 330 compatibility"
         [[ "$stage" == "vert" ]] && echo "#define VERTEX_STAGE"
-        cat "$SHIM"
         preprocess "$file"
     } > "$tmp"
 

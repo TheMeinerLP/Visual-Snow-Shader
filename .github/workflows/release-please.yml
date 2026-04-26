@@ -20,3 +20,25 @@ jobs:
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+
+  package:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build shader ZIP
+        run: |
+          VERSION="${{ needs.release-please.outputs.tag_name }}"
+          zip -r "visual-snow-shader-${VERSION}.zip" shaders/
+          echo "ZIP=visual-snow-shader-${VERSION}.zip" >> "$GITHUB_ENV"
+
+      - name: Verify ZIP contents
+        run: unzip -l "$ZIP"
+
+      - name: Attach to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.release-please.outputs.tag_name }}
+          files: ${{ env.ZIP }}
