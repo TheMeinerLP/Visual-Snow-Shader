@@ -48,6 +48,10 @@ Seven symptoms that can be enabled individually:
 Blue surfaces specifically worsen symptoms — this is documented (Hepschke et al. 2021) and the
 shader has a matching aggravation toggle.
 
+VSS often comes with symptoms that go beyond vision — migraine and tinnitus are common
+comorbidities. Those can't be put into a shader. This project only covers what can actually
+be shown on a screen: the visual side of the condition, nothing else.
+
 ## Installation
 
 1. Install [Iris](https://irisshaders.dev/) (or Oculus for Forge)
