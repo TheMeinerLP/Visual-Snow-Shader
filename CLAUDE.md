@@ -107,13 +107,19 @@ See `.claude/commands/translate.md` (slash command uses subagent).
 
 ## Clinical Sources
 
-- Schankin et al. (2014): ICHD-3 diagnostic criteria
-- Puledda, Schankin, Goadsby (2020): phenotype study n=1100 — *Neurology*
-- Hepschke, Martin & Fraser (2021): blue light aggravation — *Front. Neurol.*
-- Eren et al. (2019): photophobia quantification
-- Schankin et al. (2020): parietal hypometabolism in palinopsia
-- Martins Silva & Puledda (2023): VSS-migraine review — *Eye*
-- Ayesha, Riehle, Leishangthem (2025): current diagnostics & management
+- Schankin et al. (2014): first formal characterisation of VSS as a distinct disorder — [10.1093/brain/awu050](https://doi.org/10.1093/brain/awu050)
+- Puledda, Schankin, Goadsby (2020): phenotype study n=1100 — *Neurology* — [10.1212/WNL.0000000000008909](https://doi.org/10.1212/WNL.0000000000008909)
+- Hepschke, Martin & Fraser (2021): blue-cone / blue-light aggravation — *Front. Neurol.* — [10.3389/fneur.2021.697923](https://doi.org/10.3389/fneur.2021.697923)
+- Eren et al. (2019): photophobia quantification — *Cephalalgia* — [10.1177/0333102419896780](https://doi.org/10.1177/0333102419896780)
+- Schankin et al. (2020): structural/functional footprint (parietal hypometabolism) — *Brain* — [10.1093/brain/awaa053](https://doi.org/10.1093/brain/awaa053)
+- Martins Silva & Puledda (2023): VSS-migraine review — *Eye* — [10.1038/s41433-023-02435-w](https://doi.org/10.1038/s41433-023-02435-w)
+- Ayesha, Riehle, Leishangthem (2025): current diagnostics & management — *Eye Brain* — [10.2147/EB.S418923](https://doi.org/10.2147/EB.S418923)
+
+## Visual Snow Initiative
+
+[visualsnowinitiative.org](https://www.visualsnowinitiative.org/) — nonprofit founded 2018,
+funds VSS research in 7 countries, achieved ICD coding for VSS, runs patient support and a
+Visual Snow Simulator. Reference their work when updating prevalence data or clinical framing.
 
 ## Non-Trivial Details
 
