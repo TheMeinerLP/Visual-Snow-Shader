@@ -3,9 +3,6 @@ name: Shader Validation
 on:
   push:
     branches: [main]
-    paths:
-      - 'shaders/**'
-      - 'test/tier2-integration/**'
   pull_request:
     paths:
       - 'shaders/**'
