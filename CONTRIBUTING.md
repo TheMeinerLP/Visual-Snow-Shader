@@ -61,8 +61,8 @@ Before submitting:
 - [ ] Tested locally in at least one Iris version
 - [ ] For new sliders: labels added to BOTH `lang/de_de.lang` AND `lang/en_us.lang`
 - [ ] For new effects: clinical source listed in PR description
-- [ ] CHANGELOG.md updated (under `## [Unreleased]`)
-- [ ] For breaking changes: explicitly noted in PR body
+- [ ] Commit messages follow Conventional Commits (release-please reads them)
+- [ ] For breaking changes: use `feat!:` or add `BREAKING CHANGE:` in commit footer
 
 CI must be green before merge (`lint` job at minimum, `iris-matrix`
 optional depending on the change).

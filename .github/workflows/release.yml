@@ -1,0 +1,28 @@
+name: Package Release
+
+# Runs when release-please (or a manual push of a vX.Y.Z tag) publishes a release.
+# Packages shaders/ into a ZIP and attaches it to the GitHub release.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Package shader ZIP
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          zip -r "visual-snow-shader-${VERSION}.zip" shaders/
+          echo "ZIP=visual-snow-shader-${VERSION}.zip" >> "$GITHUB_ENV"
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP }}
