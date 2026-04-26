@@ -1,119 +1,54 @@
-name: Iris Shader Compatibility
+name: Shader Validation
 
 on:
   push:
     branches: [main]
     paths:
       - 'shaders/**'
-      - 'shaders.properties'
+      - 'test/tier2-integration/**'
   pull_request:
     paths:
       - 'shaders/**'
+      - 'test/tier2-integration/**'
   workflow_dispatch:
 
 jobs:
-  # ═══════════════════════════════════════════════════
-  #  TIER 1 — Static linter (~10 seconds)
-  # ═══════════════════════════════════════════════════
+  # ───────────────────────────────────────────────────
+  #  TIER 1 — fast static lint (~10 s)
+  # ───────────────────────────────────────────────────
   lint:
-    name: Static Lint
+    name: Tier 1 — Static Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install glslang
+      - name: Install glslang + python
         run: |
-          sudo apt-get update
-          sudo apt-get install -y glslang-tools python3
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends glslang-tools python3
 
       - name: Run lint
-        run: |
-          python3 test/tier1-lint/lint.py shaders/
+        run: python3 test/tier1-lint/lint.py shaders/
 
-  # ═══════════════════════════════════════════════════
-  #  TIER 2 — Iris compatibility matrix
-  #
-  #  Tests the shader pack against multiple Iris/MC versions.
-  #  Build cost ~3 min per job, parallelized.
-  # ═══════════════════════════════════════════════════
-  iris-matrix:
-    name: Iris ${{ matrix.iris }} (MC ${{ matrix.mc }})
+  # ───────────────────────────────────────────────────
+  #  TIER 2 — GLSL validation via Docker shim (~1 min)
+  #  Injects Iris uniforms and validates every .vsh/.fsh
+  #  with glslangValidator — no Minecraft required.
+  # ───────────────────────────────────────────────────
+  glsl-validate:
+    name: Tier 2 — GLSL Validation
     needs: lint
     runs-on: ubuntu-latest
-    strategy:
-      # fail-fast=false: test all versions even if one breaks
-      fail-fast: false
-      matrix:
-        include:
-          # Current stable
-          - { mc: '1.21.1', iris: '1.7.5',  sodium: '0.5.11' }
-          - { mc: '1.21.1', iris: '1.7.3',  sodium: '0.5.10' }
-          # 1.20.x LTS
-          - { mc: '1.20.6', iris: '1.7.2',  sodium: '0.5.9'  }
-          - { mc: '1.20.4', iris: '1.7.0',  sodium: '0.5.8'  }
-          - { mc: '1.20.1', iris: '1.6.17', sodium: '0.5.3'  }
-          # Older but supported
-          - { mc: '1.19.4', iris: '1.6.4',  sodium: '0.4.10' }
-          - { mc: '1.19.2', iris: '1.6.0',  sodium: '0.4.4'  }
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build test image
+      - name: Build validator image
         run: |
-          docker build \
-            --build-arg MC_VERSION=${{ matrix.mc }} \
-            --build-arg IRIS_VERSION=${{ matrix.iris }} \
-            --build-arg SODIUM_VERSION=${{ matrix.sodium }} \
-            -t iris-test:${{ matrix.iris }} \
-            test/tier2-integration/
+          docker build -t shader-validator test/tier2-integration/
 
-      - name: Run shader test
-        id: shader-test
-        continue-on-error: true
+      - name: Run GLSL validation
         run: |
           docker run --rm \
-            -v "${PWD}":/shader-mount:ro \
-            -v "${PWD}/test-results":/opt/mctest/logs \
-            -e SHADER_NAME=vss-awareness \
-            -e TEST_DURATION=45 \
-            iris-test:${{ matrix.iris }}
-
-      - name: Upload logs on failure
-        if: steps.shader-test.outcome == 'failure'
-        uses: actions/upload-artifact@v4
-        with:
-          name: logs-iris-${{ matrix.iris }}-mc-${{ matrix.mc }}
-          path: test-results/
-
-      - name: Annotate result
-        run: |
-          if [[ "${{ steps.shader-test.outcome }}" == "success" ]]; then
-            echo "::notice::Iris ${{ matrix.iris }} (MC ${{ matrix.mc }}) — PASS"
-          else
-            echo "::error::Iris ${{ matrix.iris }} (MC ${{ matrix.mc }}) — FAIL"
-            exit 1
-          fi
-
-  # ═══════════════════════════════════════════════════
-  #  Compatibility matrix summary
-  # ═══════════════════════════════════════════════════
-  matrix-report:
-    name: Compatibility Report
-    needs: iris-matrix
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Generate report
-        run: |
-          echo "## Iris Compatibility Matrix" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| MC | Iris | Status |" >> $GITHUB_STEP_SUMMARY
-          echo "|----|------|--------|" >> $GITHUB_STEP_SUMMARY
-          if [[ "${{ needs.iris-matrix.result }}" == "success" ]]; then
-            echo "| All tested versions | | ✅ Pass |" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "| At least one version | | ❌ Fail |" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "See job annotations and artifacts for details." >> $GITHUB_STEP_SUMMARY
-          fi
+            -v "$PWD/shaders:/shader-mount/shaders:ro" \
+            shader-validator \
+            /shader-mount/shaders

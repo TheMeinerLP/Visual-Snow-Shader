@@ -1,0 +1,88 @@
+name: Bug Report
+description: Something isn't rendering correctly or Iris shows compile errors
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: What kind of bug?
+      options:
+        - Visual glitch / wrong effect
+        - Shader compile error in Iris
+        - Game crash after enabling shader
+        - Performance / FPS drop
+        - Effect not matching the selected profile
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: What did you see, and what did you expect instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Profile: Minimal / Moderate / …
+        2. Effects enabled: …
+        3. …
+    validations:
+      required: true
+
+  - type: input
+    id: mc-version
+    attributes:
+      label: Minecraft version
+      placeholder: "e.g. 1.21.1"
+    validations:
+      required: true
+
+  - type: input
+    id: iris-version
+    attributes:
+      label: Iris version
+      placeholder: "e.g. 1.7.5"
+    validations:
+      required: true
+
+  - type: input
+    id: shader-version
+    attributes:
+      label: Shader version
+      placeholder: "e.g. 0.8.0 — shown in the Iris shader menu"
+    validations:
+      required: true
+
+  - type: input
+    id: gpu
+    attributes:
+      label: GPU and driver
+      placeholder: "e.g. NVIDIA RTX 4080, driver 555.42 / AMD RX 6800, Mesa 24.x"
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log output
+      description: For compile errors or crashes — paste the relevant section from `.minecraft/logs/latest.log`
+      render: text
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: For visual issues — before/after, with/without the affected effect
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked there is no existing open issue for this
+          required: true
+        - label: The Iris version I'm using is listed in the README
+          required: false

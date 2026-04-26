@@ -1,0 +1,53 @@
+name: Iris Compatibility Issue
+description: Shader doesn't load or behaves differently on a specific Iris / Minecraft version
+labels: ["iris-compat", "bug"]
+body:
+  - type: input
+    id: mc-version
+    attributes:
+      label: Minecraft version
+      placeholder: "e.g. 1.20.1"
+    validations:
+      required: true
+
+  - type: input
+    id: iris-version
+    attributes:
+      label: Iris version
+      placeholder: "e.g. 1.6.17"
+    validations:
+      required: true
+
+  - type: input
+    id: shader-version
+    attributes:
+      label: Shader version
+      placeholder: "e.g. 0.8.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: symptom
+    attributes:
+      label: What goes wrong?
+      options:
+        - Shader fails to compile / red error screen
+        - Effect looks different than on other versions
+        - Game crashes on shader load
+        - Shader loads but world geometry is wrong
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Relevant log output
+      render: text

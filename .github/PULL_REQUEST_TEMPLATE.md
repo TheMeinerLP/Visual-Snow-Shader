@@ -1,39 +1,28 @@
 ## What does this PR change?
 
-Brief summary. Link issues with `Refs: #123`.
+<!-- Brief summary. Link issues with `Refs: #123` or `Fixes #123`. -->
 
 ## Type of change
 
-- [ ] Bug fix
-- [ ] New feature / symptom
-- [ ] Refactor / performance
-- [ ] Documentation
-- [ ] CI / test infrastructure
-- [ ] Translation / localization
-- [ ] Breaking change
+- [ ] Bug fix (`fix:`)
+- [ ] New symptom / feature (`feat:`)
+- [ ] Refactor / performance (`refactor:` / `perf:`)
+- [ ] Documentation (`docs:`)
+- [ ] CI / test infrastructure (`ci:`)
+- [ ] Translation / localization (`i18n:`)
+- [ ] Breaking change — use `feat!:` or add `BREAKING CHANGE:` in commit footer
 
-## Clinical Source (for new symptoms)
+## Clinical source (new or adjusted symptoms only)
 
-<Study + relevant excerpt. If adjusting existing defaults: why are
-the old values unrealistic and the new ones better?>
+<!-- Peer-reviewed paper or PubMed link. No source = no merge for new symptoms. -->
 
-## Test Status
+## Checklist
 
-- [ ] `python3 test/tier1-lint/lint.py shaders/` runs clean (0 errors)
-- [ ] Tested locally in Iris, MC version: ___
-- [ ] For new sliders: German AND English labels in `lang/`
-- [ ] CHANGELOG.md updated
-- [ ] If breaking: title prefixed with `[BREAKING]`
+- [ ] `python3 test/tier1-lint/lint.py shaders/` — 0 errors
+- [ ] Tested in at least one Iris version locally
+- [ ] New sliders: labels added to ALL `lang/*.lang` files
+- [ ] Commit messages follow Conventional Commits (release-please reads them)
 
-## Screenshots / Demo
+## Screenshots / demo
 
-For visual changes, please show before/after.
-
-## Iris Version Coverage
-
-<If relevant: which versions did you test locally?>
-
-| MC | Iris | Status |
-|---|---|---|
-| 1.21.1 | 1.7.5 | ✓ |
-| 1.20.1 | 1.6.17 | not tested |
+<!-- For any visual change: before / after. -->
