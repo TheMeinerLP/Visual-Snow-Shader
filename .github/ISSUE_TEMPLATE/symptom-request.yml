@@ -1,0 +1,55 @@
+name: New Symptom / Feature Suggestion
+description: Suggest a new VSS effect or an improvement to an existing one
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: What kind of request?
+      options:
+        - New VSS symptom
+        - Adjust an existing effect (intensity, behavior, default)
+        - New profile
+        - UX / accessibility improvement
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What are you proposing?
+      description: Describe the effect or change as concretely as possible.
+    validations:
+      required: true
+
+  - type: textarea
+    id: clinical-source
+    attributes:
+      label: Clinical source (required for new symptoms)
+      description: |
+        Link a peer-reviewed paper or PubMed entry. The shader only simulates
+        documented symptoms — we don't add effects without a source.
+      placeholder: |
+        Study: …
+        DOI / PubMed: …
+        Prevalence among VSS patients: …
+        How it looks perceptually: …
+
+  - type: textarea
+    id: lived-experience
+    attributes:
+      label: Personal experience (optional)
+      description: |
+        If you have VSS or suspect you have it, describing what you actually
+        see is valuable — even without a clinical source. It helps us tune
+        defaults to something realistic.
+
+  - type: checkboxes
+    id: willing
+    attributes:
+      label: Willing to help?
+      options:
+        - label: I'd like to open a PR for this myself
+        - label: I can help with testing
+        - label: Suggestion only

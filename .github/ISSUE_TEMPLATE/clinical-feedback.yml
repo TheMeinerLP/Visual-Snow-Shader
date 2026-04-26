@@ -1,0 +1,59 @@
+name: Clinical Accuracy Feedback
+description: Something looks wrong compared to how VSS actually presents — from a patient or clinician
+labels: ["clinical"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for people with VSS or clinical experience who notice
+        that an effect is unrealistic — wrong intensity, wrong behaviour, or
+        missing nuance. You don't need a GitHub account history or technical
+        knowledge. Just describe what you see.
+
+  - type: dropdown
+    id: affected-effect
+    attributes:
+      label: Which effect is inaccurate?
+      options:
+        - Static (core grain)
+        - Palinopsia (afterimages / trails)
+        - Photophobia (light sensitivity)
+        - Nyctalopia (night blindness)
+        - Floaters
+        - Blue Field Phenomenon
+        - Self-light / phosphenes
+        - General / multiple effects
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-is-wrong
+    attributes:
+      label: What is wrong or missing?
+      description: How does the shader differ from what you actually perceive?
+    validations:
+      required: true
+
+  - type: textarea
+    id: how-it-should-look
+    attributes:
+      label: How should it look?
+      description: Describe as specifically as you can — colour, speed, intensity, when it occurs, etc.
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Source or reference (optional)
+      description: Clinical paper, patient forum thread, or personal experience — all are useful.
+
+  - type: dropdown
+    id: background
+    attributes:
+      label: Your background (optional)
+      options:
+        - I have VSS (diagnosed)
+        - I have VSS (undiagnosed / self-identified)
+        - I'm a clinician or researcher
+        - I know someone with VSS
+        - Other / prefer not to say
