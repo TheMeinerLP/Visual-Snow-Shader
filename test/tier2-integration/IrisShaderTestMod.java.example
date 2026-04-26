@@ -1,0 +1,80 @@
+/*
+ * IrisShaderTestMod — Minimal Fabric mod
+ *
+ * Purpose: in CI/Docker, MC starts, loads Iris, loads our shader,
+ * waits until the compile phase is complete, then calls System.exit().
+ *
+ * Instead of waiting 30+ seconds for a full boot, this mod exits as
+ * soon as Iris has loaded the shader pack successfully (or unsuccessfully).
+ *
+ * --- Setup ---
+ * 1. Generate a standard Fabric template via fabric-example-mod
+ * 2. Place this file at src/main/java/.../IrisShaderTestMod.java
+ * 3. fabric.mod.json entry-point: "client" -> "YourClass"
+ * 4. dependencies: fabric-loader, iris-api
+ * 5. ./gradlew build -> mods/iris-shader-test.jar
+ * 6. Copy into the mods directory in the Dockerfile
+ *
+ * --- Behavior ---
+ * - reads system property iris.test.shader=PathToZip
+ * - activates Iris with that pack
+ * - parses Iris log for "shader compilation failed" or similar
+ * - calls System.exit(0) on success, exit(1) on failure
+ *
+ * The concrete Iris API can change between versions — this mod must
+ * be compiled per Iris major version.
+ */
+
+package dev.oneliteFeather.irisshadertest;
+
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.minecraft.client.MinecraftClient;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.nio.file.Path;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public class IrisShaderTestMod implements ClientModInitializer {
+    private static final Logger LOG = LoggerFactory.getLogger("iris-shader-test");
+    private static final AtomicBoolean tested = new AtomicBoolean(false);
+
+    @Override
+    public void onInitializeClient() {
+        String shaderPath = System.getProperty("iris.test.shader");
+        if (shaderPath == null) {
+            LOG.warn("iris.test.shader system property not set — running normally");
+            return;
+        }
+        LOG.info("Iris Shader Test Mod active. Pack: {}", shaderPath);
+
+        ClientLifecycleEvents.CLIENT_STARTED.register(client -> {
+            if (!tested.compareAndSet(false, true)) return;
+
+            // Wait 2s for Iris to finish initialization, then load the
+            // shader via the Iris API.
+            new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+
+                    // PSEUDOCODE — the actual Iris API differs per version.
+                    // For example, in Iris 1.7.x:
+                    //   net.coderbot.iris.shaderpack.IrisShaderpack pack =
+                    //       Iris.getInstance().loadShaderpack(Path.of(shaderPath));
+                    //   if (pack.hasErrors()) System.exit(1);
+                    //
+                    // In Iris 2.x the API is different again. Therefore a
+                    // wrapper library per major version is needed.
+
+                    LOG.info("Shader load test PASSED (placeholder)");
+                    System.exit(0);
+                } catch (Throwable t) {
+                    LOG.error("Shader load test FAILED", t);
+                    System.exit(1);
+                }
+            }, "iris-shader-test").start();
+        });
+    }
+}

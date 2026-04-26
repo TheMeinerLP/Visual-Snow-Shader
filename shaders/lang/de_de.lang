@@ -1,0 +1,197 @@
+# =====================================================
+#  Visual Snow Awareness Shader v6 — Deutsche UI
+# =====================================================
+
+
+# ====================== PROFILE ======================
+profile.OFF=§7§lAus
+profile.MINIMAL=§a§lMinimal §r§7(Default)
+profile.SCREENING=§6§lScreening §r§7(Split-Vergleich)
+profile.MILD=§aMild
+profile.MODERATE=§eModerat
+profile.SEVERE=§cSchwer
+profile.STATIC_ONLY=§7Nur Static
+profile.HPPD=§dHPPD-Phänotyp
+profile.CUSTOM=§bBenutzerdefiniert
+profile.comment=§7§lAus§r: alle Effekte deaktiviert. §a§lMinimal§r: nur Static + leichte Floater. §6Screening§r: Split-Vergleich für Kindertest. §aMild§r/§eModerat§r/§cSchwer§r: progressiv steigend. §c[!]§r Kein medizinisches Diagnoseinstrument.
+
+
+# ====================== GLOBAL ======================
+option.GLOBAL_INTENSITY=Master-Mix
+option.GLOBAL_INTENSITY.comment=Mischt das Original-Bild mit dem Effekt. §a0%§r = nur Original. §c100%§r = volle Effekt-Stärke. Wirkt wie eine Layer-Opazität in Photoshop.
+
+option.COMPARISON_MODE=Vergleichsmodus
+value.COMPARISON_MODE.0=§7Aus
+value.COMPARISON_MODE.1=§eSplit Vertikal
+value.COMPARISON_MODE.2=§eSplit Horizontal
+value.COMPARISON_MODE.3=§dZeit-Toggle (3s)
+option.COMPARISON_MODE.comment=A/B-Gegenüberstellung. §eSplit§r: Bildschirm geteilt mit oranger Linie. §dZeit-Toggle§r: alle 3s alternierend, grüner/roter Statuspunkt oben rechts.
+
+
+# ====================== SYMPTOM-MASTER (Hauptmenü) ======================
+option.STATIC_STRENGTH=§b§lStatic-Stärke
+option.STATIC_STRENGTH.comment=Master-Slider für das Visual-Snow-Korn (Kernsymptom). §a0%§r = aus, §c100%§r = voller realistischer Effekt. §e[i]§r Empfohlener Bereich: 30–60%.
+
+option.FLOATERS_STRENGTH=§7§lFloater-Stärke
+option.FLOATERS_STRENGTH.comment=Master-Slider für Floater (Glaskörpertrübungen). §e[i]§r Bei 20–40% sieht man 1-3 schwebende Schatten.
+
+option.PALINOPSIA_STRENGTH=§d§lPalinopsie-Stärke
+option.PALINOPSIA_STRENGTH.comment=Master-Slider für Nachbilder/Trailing. Sichtbar bei Kamerabewegung. §c[!]§r Bei hohen Werten und statischer Kamera kann das Bild "einbrennen".
+
+option.PHOTOPHOBIA_STRENGTH=§e§lPhotophobie-Stärke
+option.PHOTOPHOBIA_STRENGTH.comment=Master-Slider für Lichtempfindlichkeit. Bloom + Exposure-Overshoot bei hellen Bereichen. §c[!]§r Hellt helle Flächen wie Himmel sichtbar auf.
+
+option.NYKTALOPIA_STRENGTH=§9§lNyktalopie-Stärke
+option.NYKTALOPIA_STRENGTH.comment=Master-Slider für gestörtes Nachtsehen. Reduziert Sättigung und Helligkeit in dunklen Szenen. Tagsüber unsichtbar.
+
+option.BLUE_FIELD_STRENGTH=§b§lBlue Field-Stärke
+option.BLUE_FIELD_STRENGTH.comment=Master-Slider für BFEP (Blue Field Entoptic Phenomenon). Helle Punkte über homogenen blauen Flächen. §c[!]§r Am sichtbarsten am Himmel — kann das Bild dort dominieren.
+
+option.SELF_LIGHT_STRENGTH=§d§lSelf-light-Stärke
+option.SELF_LIGHT_STRENGTH.comment=Master-Slider für Eigenlicht. Farbige morphende Wolken in tiefer Dunkelheit. Tagsüber unsichtbar.
+
+option.ENABLE_BLUE_AGGRAVATION=Blaulicht-Trigger
+value.ENABLE_BLUE_AGGRAVATION.0=§cAUS
+value.ENABLE_BLUE_AGGRAVATION.1=§aAN
+option.ENABLE_BLUE_AGGRAVATION.comment=§c[!]§r Klinisch belegt (Hepschke et al. 2021): blaue Zapfenaktivierung verstärkt VSS. Multipliziert Static auf blauen Bildbereichen.
+
+option.BLUE_AGGRAVATION_STRENGTH=Trigger-Faktor
+suffix.BLUE_AGGRAVATION_STRENGTH= ×
+
+
+# ====================== ADVANCED-TABS ======================
+screen.Static_Adv=§b§lStatic — Details
+screen.Static_Adv.comment=Detail-Parameter für das Static-Korn. Master-Stärke ist im Hauptmenü.
+
+screen.Floater_Adv=§7§lFloater — Details
+screen.Floater_Adv.comment=Detail-Parameter für Floater.
+
+screen.Palinopsia_Adv=§d§lPalinopsie — Details
+screen.Palinopsia_Adv.comment=Detail-Parameter für Nachbilder.
+
+screen.Photophobia_Adv=§e§lPhotophobie — Details
+screen.Photophobia_Adv.comment=Detail-Parameter für Lichtempfindlichkeit.
+
+screen.Nyktalopia_Adv=§9§lNyktalopie — Details
+screen.Nyktalopia_Adv.comment=Detail-Parameter für Nachtblindheit.
+
+screen.BlueField_Adv=§b§lBlue Field — Details
+screen.BlueField_Adv.comment=Detail-Parameter für BFEP.
+
+screen.SelfLight_Adv=§d§lSelf-light — Details
+screen.SelfLight_Adv.comment=Detail-Parameter für Eigenlicht.
+
+screen.About=§b[i] Über
+screen.About.comment=Anleitung, Disclaimer, Quellen.
+
+
+# ====================== STATIC DETAILS ======================
+option.STATIC_AMPLITUDE=Korn-Kontrast (max)
+option.STATIC_AMPLITUDE.comment=Maximale Amplitude des Korns. Wird mit Master-Stärke multipliziert. §e[i]§r Klinisch realistisch: 0.10–0.20.
+
+option.STATIC_DENSITY=Korn-Dichte
+option.STATIC_DENSITY.comment=Anteil der Pixel mit sichtbarem Korn.
+
+option.STATIC_GRAIN_SIZE=Korn-Größe
+suffix.STATIC_GRAIN_SIZE= px
+
+option.STATIC_FLICKER=Flimmer-Geschwindigkeit
+suffix.STATIC_FLICKER= ×
+
+option.STATIC_TYPE=VS-Typ
+option.STATIC_TYPE.comment=§bPulse VS§r: folgt Hintergrund-Tonalität. §dBroadband VS§r: kontrastiert.
+value.STATIC_TYPE.0=§bPulse
+value.STATIC_TYPE.1=§dBroadband
+
+option.STATIC_COLORED=Farb-Modus
+value.STATIC_COLORED.0=§7Monochrom
+value.STATIC_COLORED.1=§dFarbig
+
+
+# ====================== FLOATER DETAILS ======================
+option.FLOATERS_COUNT=Anzahl
+option.FLOATERS_SIZE=Größe
+suffix.FLOATERS_SIZE= ×
+option.FLOATERS_OPACITY=Sichtbarkeit (max)
+option.FLOATERS_OPACITY.comment=Maximale Opazität. Wird mit Master-Stärke multipliziert.
+option.FLOATERS_DRIFT=Drift-Geschwindigkeit
+suffix.FLOATERS_DRIFT= ×
+
+
+# ====================== PALINOPSIE DETAILS ======================
+option.PALINOPSIA_BLEND=Trail-Stärke (max)
+option.PALINOPSIA_BLEND.comment=Maximale Mix-Stärke. Wird mit Master multipliziert.
+option.PALINOPSIA_DECAY=Zerfallsrate
+option.PALINOPSIA_BRIGHT_BIAS=Hell-Bias
+option.PALINOPSIA_PICKUP=Aufnahme-Empfindlichkeit
+
+
+# ====================== PHOTOPHOBIE DETAILS ======================
+option.PHOTOPHOBIA_BLOOM=Bloom-Stärke (max)
+option.PHOTOPHOBIA_OVERSHOOT=Exposure-Overshoot (max)
+option.PHOTOPHOBIA_RADIUS=Bloom-Radius
+suffix.PHOTOPHOBIA_RADIUS= px
+
+
+# ====================== NYKTALOPIE DETAILS ======================
+option.NYKTALOPIA_DESATURATION=Sättigungsverlust (max)
+option.NYKTALOPIA_DARKENING=Verdunkelung (max)
+option.NYKTALOPIA_THRESHOLD=Helligkeits-Schwelle
+
+
+# ====================== BLUE FIELD DETAILS ======================
+option.BLUE_FIELD_DENSITY=Punkt-Dichte
+option.BLUE_FIELD_SIZE=Punkt-Größe
+suffix.BLUE_FIELD_SIZE= ×
+option.BLUE_FIELD_BRIGHTNESS=Helligkeit (max)
+option.BLUE_FIELD_SPEED=Bewegungs-Tempo
+suffix.BLUE_FIELD_SPEED= ×
+
+
+# ====================== SELF-LIGHT DETAILS ======================
+option.SELF_LIGHT_BRIGHTNESS=Helligkeit (max)
+option.SELF_LIGHT_SPEED=Morphing-Tempo
+suffix.SELF_LIGHT_SPEED= ×
+option.SELF_LIGHT_THRESHOLD=Dunkelheits-Schwelle
+option.SELF_LIGHT_SCALE=Wolken-Skala
+
+
+# ====================== INFO-OPTIONEN ======================
+option.info_about=§b§lÜber diesen Shader
+option.info_about.comment=§b§lVisual Snow Awareness Shader§r§r für Iris.§r §7Simuliert die visuellen Symptome des VSS — einer neurologischen Erkrankung mit kortikaler Hyperexzitabilität. Prävalenz ~2,2%. §e[i]§r Ziel: Awareness, Empathie, Screening-Hilfe.
+
+option.info_default=§a§l▶ So benutzt du diesen Shader
+option.info_default.comment=§a§lOverlay-Modell§r §7Jedes Symptom hat einen Master-Slider (0–100%) — wie eine Layer-Opazität. §a0%§r = unsichtbar, §c100%§r = voller Effekt. §a1.§r Profil-Button oben links für schnelle Presets. §a2.§r Einzelne Slider justieren für gezielten Effekt. §a3.§r §6[Advanced]§r-Buttons öffnen Detail-Parameter pro Symptom. §a4.§r Master-Mix mischt das gesamte Effekt-Layer mit dem Original. §c[!]§r Test auf Terrain mit Details, nicht auf flachem Himmel — dort dominieren Effekte.
+
+option.info_screening=§6§lScreening-Anleitung
+option.info_screening.comment=§6§lAnwendung für Eltern/Pädiater§r §7Kinder mit angeborener VSS halten ihre Wahrnehmung oft für normal. §a1.§r Kind spielt Minecraft normal. §a2.§r Profil §6Screening§r aktivieren (Split-Vertikal). §a3.§r Frage: "Sieht eine Hälfte anders aus als die andere?" §a4.§r Wenn das Kind keinen Unterschied wahrnimmt oder die Effekt-Seite "normaler" findet — §c[!]§r Hinweis auf VSS, Spezialist konsultieren. §c[!]§r KEIN Diagnoseinstrument.
+
+option.info_static=§b§lÜber Static (Visual Snow)
+option.info_static.comment=Kernsymptom: dynamische körnige Punkte im gesamten Gesichtsfeld, > 3 Monate persistent (ICHD-3, Schankin et al. 2014).
+
+option.info_palinopsia=§b§lÜber Palinopsie
+option.info_palinopsia.comment=Nachbilder, Trailing. Schankin et al. 2020: Hypometabolismus im Lobulus parietalis inferior.
+
+option.info_floaters=§b§lÜber Floater
+option.info_floaters.comment=Glaskörpertrübungen — bei VSS verstärkt wahrgenommen.
+
+option.info_blue_field=§b§lÜber Blue Field Phenomenon
+option.info_blue_field.comment=BFEP: schnell huschende helle Punkte über homogenen blauen Flächen. Real durch weiße Blutkörperchen in den Retinakapillaren.
+
+option.info_self_light=§b§lÜber Self-light
+option.info_self_light.comment=Eigenlicht: farbige morphende Wolken in tiefer Dunkelheit oder bei geschlossenen Augen.
+
+option.info_photophobia=§b§lÜber Photophobie
+option.info_photophobia.comment=Lichtempfindlichkeit. Eren et al. 2019: bei VSS phänomenologisch ähnlich akuter Migräne.
+
+option.info_nyktalopia=§b§lÜber Nyktalopie
+option.info_nyktalopia.comment=Gestörtes Nachtsehen, Kontrast- und Sättigungsverlust.
+
+option.info_blue_aggravation=§c§lÜber Blaulicht-Aggravation
+option.info_blue_aggravation.comment=§c[!]§r Hepschke et al. 2021: blaue Zapfenaktivierung verstärkt VSS-Symptome.
+
+option.info_disclaimer=§c§l[!] Disclaimer
+option.info_disclaimer.comment=§c[!]§r Kein medizinisches Diagnoseinstrument. Echte VSS-Wahrnehmung entsteht im Kortex, nicht auf einem Monitor. Bei Verdacht auf VSS bitte Neuro-Ophthalmologen aufsuchen. ICHD-3-Diagnose verlangt > 3 Monate persistente Symptome plus 2 von 4 Zusatzsymptomen plus Ausschluss anderer Ursachen.
+
+option.info_credits=§6§lQuellen & Forschung
+option.info_credits.comment=§6Schankin et al.§r (2014): ICHD-3. §6Puledda, Schankin, Goadsby§r (2020): n=1100. §6Hepschke et al.§r (2021): Blaulicht. §6Eren et al.§r (2019): Photophobie. §6Schankin et al.§r (2020): Palinopsie. §6Martins Silva & Puledda§r (2023). §6Ayesha et al.§r (2025).

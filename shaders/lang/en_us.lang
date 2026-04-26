@@ -1,0 +1,197 @@
+# =====================================================
+#  Visual Snow Awareness Shader v6 — English UI
+# =====================================================
+
+
+# ====================== PROFILE ======================
+profile.OFF=§7§lOff
+profile.MINIMAL=§a§lMinimal §r§7(Default)
+profile.SCREENING=§6§lScreening §r§7(Split-Vergleich)
+profile.MILD=§aMild
+profile.MODERATE=§eModerat
+profile.SEVERE=§cSchwer
+profile.STATIC_ONLY=§7Static Only
+profile.HPPD=§dHPPD Phenotype
+profile.CUSTOM=§bCustom
+profile.comment=§7§lOff§r: all effects disabled. §a§lMinimal§r: only static + light floaters. §6Screening§r: split comparison for child screening. §aMild§r/§eModerat§r/§cSchwer§r: progressively stronger. §c[!]§r Not a medical diagnostic tool.
+
+
+# ====================== GLOBAL ======================
+option.GLOBAL_INTENSITY=Master-Mix
+option.GLOBAL_INTENSITY.comment=Mixes the original image with the effect. §a0%§r = original only. §c100%§r = full effect strength. Works like a Photoshop layer opacity.
+
+option.COMPARISON_MODE=Comparison Mode
+value.COMPARISON_MODE.0=§7Aus
+value.COMPARISON_MODE.1=§eSplit Vertical
+value.COMPARISON_MODE.2=§eSplit Horizontal
+value.COMPARISON_MODE.3=§dTime Toggle (3s)
+option.COMPARISON_MODE.comment=A/B comparison. §eSplit§r: screen split with orange line. §dZeit-Toggle§r: alternates every 3s, green/red status dot top right.
+
+
+# ====================== SYMPTOM-MASTER (Hauptmenü) ======================
+option.STATIC_STRENGTH=§b§lStatic Strength
+option.STATIC_STRENGTH.comment=Master slider for the visual snow grain (core symptom). §a0%§r = off, §c100%§r = full realistic effect. §e[i]§r Recommended range: 30–60%.
+
+option.FLOATERS_STRENGTH=§7§lFloater Strength
+option.FLOATERS_STRENGTH.comment=Master slider for floaters (vitreous opacities). §e[i]§r At 20–40% you see 1-3 floating shadows.
+
+option.PALINOPSIA_STRENGTH=§d§lPalinopsia Strength
+option.PALINOPSIA_STRENGTH.comment=Master slider for afterimages/trailing. Visible during camera motion. §c[!]§r At high values with static camera the image can "burn in".
+
+option.PHOTOPHOBIA_STRENGTH=§e§lPhotophobia Strength
+option.PHOTOPHOBIA_STRENGTH.comment=Master slider for light sensitivity. Bloom + exposure overshoot in bright areas. §c[!]§r Visibly brightens light surfaces like sky.
+
+option.NYKTALOPIA_STRENGTH=§9§lNyctalopia Strength
+option.NYKTALOPIA_STRENGTH.comment=Master slider for impaired night vision. Reduces saturation and brightness in dark scenes. Invisible during daytime.
+
+option.BLUE_FIELD_STRENGTH=§b§lBlue Field Strength
+option.BLUE_FIELD_STRENGTH.comment=Master slider for BFEP (Blue Field Entoptic Phenomenon). Bright dots over homogeneous blue surfaces. §c[!]§r Most visible on sky — can dominate the image there.
+
+option.SELF_LIGHT_STRENGTH=§d§lSelf-light Strength
+option.SELF_LIGHT_STRENGTH.comment=Master slider for self-light. Colored morphing clouds in deep darkness. Invisible during daytime.
+
+option.ENABLE_BLUE_AGGRAVATION=Blue Light Trigger
+value.ENABLE_BLUE_AGGRAVATION.0=§cAUS
+value.ENABLE_BLUE_AGGRAVATION.1=§aAN
+option.ENABLE_BLUE_AGGRAVATION.comment=§c[!]§r Clinically established (Hepschke et al. 2021): blue cone activation aggravates VSS. Multiplies static in blue image regions.
+
+option.BLUE_AGGRAVATION_STRENGTH=Trigger Factor
+suffix.BLUE_AGGRAVATION_STRENGTH= ×
+
+
+# ====================== ADVANCED-TABS ======================
+screen.Static_Adv=§b§lStatic — Advanced
+screen.Static_Adv.comment=Detail parameters for the static grain. Master strength is in the main menu.
+
+screen.Floater_Adv=§7§lFloater — Advanced
+screen.Floater_Adv.comment=Detail parameters for floaters.
+
+screen.Palinopsia_Adv=§d§lPalinopsia — Advanced
+screen.Palinopsia_Adv.comment=Detail parameters for afterimages.
+
+screen.Photophobia_Adv=§e§lPhotophobia — Advanced
+screen.Photophobia_Adv.comment=Detail parameters for light sensitivity.
+
+screen.Nyktalopia_Adv=§9§lNyctalopia — Advanced
+screen.Nyktalopia_Adv.comment=Detail parameters for night blindness.
+
+screen.BlueField_Adv=§b§lBlue Field — Advanced
+screen.BlueField_Adv.comment=Detail parameters for BFEP.
+
+screen.SelfLight_Adv=§d§lSelf-light — Advanced
+screen.SelfLight_Adv.comment=Detail parameters for self-light.
+
+screen.About=§b[i] About
+screen.About.comment=Guide, disclaimer, sources.
+
+
+# ====================== STATIC DETAILS ======================
+option.STATIC_AMPLITUDE=Grain Contrast (max)
+option.STATIC_AMPLITUDE.comment=Maximum grain amplitude. Multiplied by master strength. §e[i]§r Clinically realistic: 0.10–0.20.
+
+option.STATIC_DENSITY=Grain Density
+option.STATIC_DENSITY.comment=Fraction of pixels with visible grain.
+
+option.STATIC_GRAIN_SIZE=Grain Size
+suffix.STATIC_GRAIN_SIZE= px
+
+option.STATIC_FLICKER=Flicker Speed
+suffix.STATIC_FLICKER= ×
+
+option.STATIC_TYPE=VS Type
+option.STATIC_TYPE.comment=§bPulse VS§r: matches background tonality. §dBroadband VS§r: contrasts.
+value.STATIC_TYPE.0=§bPulse
+value.STATIC_TYPE.1=§dBroadband
+
+option.STATIC_COLORED=Color Mode
+value.STATIC_COLORED.0=§7Monochrome
+value.STATIC_COLORED.1=§dColored
+
+
+# ====================== FLOATER DETAILS ======================
+option.FLOATERS_COUNT=Count
+option.FLOATERS_SIZE=Size
+suffix.FLOATERS_SIZE= ×
+option.FLOATERS_OPACITY=Visibility (max)
+option.FLOATERS_OPACITY.comment=Maximum opacity. Multiplied by master strength.
+option.FLOATERS_DRIFT=Drift Speed
+suffix.FLOATERS_DRIFT= ×
+
+
+# ====================== PALINOPSIE DETAILS ======================
+option.PALINOPSIA_BLEND=Trail Strength (max)
+option.PALINOPSIA_BLEND.comment=Maximum mix strength. Multiplied by master.
+option.PALINOPSIA_DECAY=Decay Rate
+option.PALINOPSIA_BRIGHT_BIAS=Bright Bias
+option.PALINOPSIA_PICKUP=Pickup Sensitivity
+
+
+# ====================== PHOTOPHOBIE DETAILS ======================
+option.PHOTOPHOBIA_BLOOM=Bloom Strength (max)
+option.PHOTOPHOBIA_OVERSHOOT=Exposure Overshoot (max)
+option.PHOTOPHOBIA_RADIUS=Bloom Radius
+suffix.PHOTOPHOBIA_RADIUS= px
+
+
+# ====================== NYKTALOPIE DETAILS ======================
+option.NYKTALOPIA_DESATURATION=Saturation Loss (max)
+option.NYKTALOPIA_DARKENING=Darkening (max)
+option.NYKTALOPIA_THRESHOLD=Brightness Threshold
+
+
+# ====================== BLUE FIELD DETAILS ======================
+option.BLUE_FIELD_DENSITY=Dot Density
+option.BLUE_FIELD_SIZE=Punkt-Size
+suffix.BLUE_FIELD_SIZE= ×
+option.BLUE_FIELD_BRIGHTNESS=Brightness (max)
+option.BLUE_FIELD_SPEED=Movement Speed
+suffix.BLUE_FIELD_SPEED= ×
+
+
+# ====================== SELF-LIGHT DETAILS ======================
+option.SELF_LIGHT_BRIGHTNESS=Brightness (max)
+option.SELF_LIGHT_SPEED=Morph Speed
+suffix.SELF_LIGHT_SPEED= ×
+option.SELF_LIGHT_THRESHOLD=Darkness Threshold
+option.SELF_LIGHT_SCALE=Cloud Scale
+
+
+# ====================== INFO-OPTIONEN ======================
+option.info_about=§b§lAbout diesen Shader
+option.info_about.comment=§b§lVisual Snow Awareness Shader§r§r for Iris.§r §7Simulates the visual symptoms of VSS — a neurological condition with cortical hyperexcitability. Prevalence ~2.2%. §e[i]§r Goal: awareness, empathy, screening aid.
+
+option.info_default=§a§l▶ How to use this shader
+option.info_default.comment=§a§lOverlay model§r §7Each symptom has a master slider (0–100%) — like a layer opacity. §a0%§r = invisible, §c100%§r = full effect. §a1.§r profile button (top left) for quick presets. §a2.§r adjust individual sliders for targeted effects. §a3.§r §6[Advanced]§r buttons open detail parameters per symptom. §a4.§r Master Mix blends the whole effect layer with the original. §c[!]§r Test against detailed terrain, not flat sky — effects dominate uniform surfaces.
+
+option.info_screening=§6§lScreening Guide
+option.info_screening.comment=§6§lUsage for parents/pediatricians§r §7Children with congenital VSS often consider their perception normal. §a1.§r Child plays Minecraft normally. §a2.§r Activate §6Screening§r profile (split vertical). §a3.§r Ask: "Does one side look different from the other?" §a4.§r If the child sees no difference or the effect side looks "more normal" — §c[!]§r indication of VSS, consult specialist. §c[!]§r NOT a diagnostic tool.
+
+option.info_static=§b§lAbout Static (Visual Snow)
+option.info_static.comment=Core symptom: dynamic granular dots across the entire visual field, > 3 months persistent (ICHD-3, Schankin et al. 2014).
+
+option.info_palinopsia=§b§lAbout Palinopsie
+option.info_palinopsia.comment=Afterimages, trailing. Schankin et al. 2020: hypometabolism in the inferior parietal lobule.
+
+option.info_floaters=§b§lAbout Floater
+option.info_floaters.comment=Vitreous opacities — perceived with heightened awareness in VSS.
+
+option.info_blue_field=§b§lAbout Blue Field Phenomenon
+option.info_blue_field.comment=BFEP: bright dots traveling fast over homogeneous blue surfaces. Caused by white blood cells in retinal capillaries.
+
+option.info_self_light=§b§lAbout Self-light
+option.info_self_light.comment=Self-light: colored morphing clouds in deep darkness or with closed eyes.
+
+option.info_photophobia=§b§lAbout Photophobie
+option.info_photophobia.comment=Light sensitivity. Eren et al. 2019: in VSS phenomenologically similar to acute migraine.
+
+option.info_nyktalopia=§b§lAbout Nyktalopie
+option.info_nyktalopia.comment=Impaired night vision, contrast and saturation loss.
+
+option.info_blue_aggravation=§c§lAbout Blaulicht-Aggravation
+option.info_blue_aggravation.comment=§c[!]§r Hepschke et al. 2021: blue cone activation aggravates VSS symptoms.
+
+option.info_disclaimer=§c§l[!] Disclaimer
+option.info_disclaimer.comment=§c[!]§r Not a medical diagnostic tool. Echte VSS-Wahrnehmung entsteht im Kortex, nicht auf einem Monitor. Bei Verdacht auf VSS bitte Neuro-Ophthalmologen aufsuchen. ICHD-3 diagnosis requires > 3 months persistent symptoms plus 2 of 4 additional symptoms plus exclusion of other causes.
+
+option.info_credits=§6§lSources & Research
+option.info_credits.comment=§6Schankin et al.§r (2014): ICHD-3. §6Puledda, Schankin, Goadsby§r (2020): n=1100. §6Hepschke et al.§r (2021): Blaulicht. §6Eren et al.§r (2019): Photophobie. §6Schankin et al.§r (2020): Palinopsie. §6Martins Silva & Puledda§r (2023). §6Ayesha et al.§r (2025).

@@ -1,0 +1,27 @@
+# Build artifacts
+*.zip
+build/
+dist/
+
+# Test artifacts
+test-results/
+test/tier2-integration/mods/*.jar
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Claude Code local state (per-user, not tracked)
+.claude/local/

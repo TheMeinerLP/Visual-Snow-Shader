@@ -1,0 +1,46 @@
+name: Lint
+
+# Fast pre-commit/PR gate. Runs on every push and PR.
+# The full Iris matrix (iris-compat.yml) runs separately and is slower.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  static-lint:
+    name: GLSL + Iris patterns
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            glslang-tools python3
+
+      - name: Run Tier-1 linter
+        run: |
+          python3 test/tier1-lint/lint.py shaders/
+
+      - name: Verify lang file consistency
+        run: |
+          # Both lang files must cover the same options
+          de_count=$(grep -c '^option\.' shaders/lang/de_de.lang || echo 0)
+          en_count=$(grep -c '^option\.' shaders/lang/en_us.lang || echo 0)
+          echo "de_de.lang: $de_count entries"
+          echo "en_us.lang: $en_count entries"
+          if [ "$de_count" -ne "$en_count" ]; then
+            echo "::warning::Lang files have different entry counts"
+          fi
+
+      - name: Validate shaders.properties syntax
+        run: |
+          # Sanity check: no curly braces (no meaning in Iris .properties)
+          if grep -E '^\s*[{}]' shaders/shaders.properties; then
+            echo "::error::shaders.properties contains {/}, which has no meaning here"
+            exit 1
+          fi
