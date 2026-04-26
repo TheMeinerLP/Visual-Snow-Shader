@@ -1,10 +1,11 @@
 # Visual Snow Shader
 
-My girlfriend [@onelitefeather](https://github.com/onelitefeather) experiences symptoms that
-match Visual Snow Syndrome closely — she's not formally diagnosed yet, but lives with what
-appears to be VSS every day. She wanted to show me what that actually looks like. We needed
-a simulator. Minecraft with Iris shaders turned out to be the right fit — accessible, no
-friction, and you can just hand someone a controller and say "this is my vision."
+My girlfriend [@onelitefeather](https://github.com/onelitefeather) has lived with VSS her
+whole life. She never got a formal diagnosis — not because she didn't seek one, but because
+VSS simply wasn't a recognized condition when her symptoms started. She wanted to show me
+what she sees every day. We needed a simulator. Minecraft with Iris shaders turned out to
+be the right fit — accessible, no friction, and you can just hand someone a controller and
+say "this is my vision."
 
 That's where this started. Since a lot of people with VSS go undiagnosed for years (many
 don't even realize their vision is different), we decided to make this public. If it helps
