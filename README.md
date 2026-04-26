@@ -1,8 +1,15 @@
 # Visual Snow Shader
 
-An Iris shader pack for Minecraft that simulates the visual symptoms of
-**Visual Snow Syndrome (VSS)** — as an awareness tool for empathy and
-as a screening aid for parents.
+My girlfriend [@onelitefeather](https://github.com/onelitefeather) experiences symptoms that
+match Visual Snow Syndrome closely — she's not formally diagnosed yet, but lives with what
+appears to be VSS every day. She wanted to show me what that actually looks like. We needed
+a simulator. Minecraft with Iris shaders turned out to be the right fit — accessible, no
+friction, and you can just hand someone a controller and say "this is my vision."
+
+That's where this started. Since a lot of people with VSS go undiagnosed for years (many
+don't even realize their vision is different), we decided to make this public. If it helps
+one person realize they're not imagining things, or helps someone understand what a person
+close to them experiences — that's the point.
 
 [![Iris Compat](https://img.shields.io/badge/Iris-1.6%2B-blue)](https://irisshaders.dev/)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.19%2B-green)](https://minecraft.net/)
@@ -10,96 +17,126 @@ as a screening aid for parents.
 
 ## What is Visual Snow Syndrome?
 
-VSS is a neurological disorder involving cortical hyperexcitability and
-thalamocortical dysrhythmia. Affected individuals see a constant
-flickering grain across their entire visual field — like the noise of a
-poorly tuned analog TV set.
+VSS is a neurological condition where the brain never stops generating visual noise. People
+with VSS see a permanent static — like a TV with no signal — overlaid on everything, day and
+night, eyes open or closed.
 
-- **Prevalence:** ~2.2 % of the population (UK study, Puledda 2020)
-- **Onset:** often in childhood or early adolescence
-- **Diagnosis:** ICHD-3 criteria — static plus 2 of 4 additional symptoms
+About 2.2 % of the population has it (Puledda et al. 2020). Many have had it since childhood
+and assume this is just how everyone sees. They never get diagnosed.
 
-Because many people with VSS have lived with it since birth, they often
-assume it is normal vision and never get diagnosed.
+The underlying mechanism is cortical hyperexcitability and thalamocortical dysrhythmia. The
+ICHD-3 criteria require the static plus at least 2 of 4 additional symptoms (palinopsia,
+enhanced entoptic phenomena, photophobia, nyctalopia) lasting more than 3 months.
 
-## What does this shader simulate?
+## What this shader simulates
 
-Seven clinically documented symptoms, individually toggleable:
+Seven symptoms that can be enabled individually:
 
-| Symptom | Description |
+| Symptom | What it looks like |
 |---|---|
-| **Static** (core symptom) | flickering grain across the whole image |
-| **Palinopsia** | afterimages, trailing of moving objects |
-| **Photophobia** | light sensitivity, bloom around bright sources |
-| **Nyctalopia** | impaired night vision |
-| **Floaters** | drifting vitreous opacities |
-| **Blue Field Phenomenon** | dots over uniform blue surfaces |
-| **Self-light** | colored clouds in deep darkness |
+| **Static** | constant grain over the whole screen — the core symptom |
+| **Palinopsia** | afterimages; moving objects leave a trail |
+| **Photophobia** | bright sources bloom and feel overwhelming |
+| **Nyctalopia** | night vision degrades faster than it should |
+| **Floaters** | drifting translucent shapes in the vitreous |
+| **Blue Field Phenomenon** | tiny bright dots moving over uniform blue sky |
+| **Self-light** | faint colored phosphene clouds when it's completely dark |
 
-Plus the **blue light aggravation trigger** per Hepschke et al. (2021).
+Blue surfaces specifically worsen symptoms — this is documented (Hepschke et al. 2021) and the
+shader has a matching aggravation toggle.
 
 ## Installation
 
 1. Install [Iris](https://irisshaders.dev/) (or Oculus for Forge)
 2. Download the ZIP from [Releases](../../releases)
-3. Place the ZIP in `.minecraft/shaderpacks/`
-4. In Minecraft: Options → Video Settings → Shader Packs → select it
+3. Drop the ZIP into `.minecraft/shaderpacks/`
+4. Minecraft → Options → Video Settings → Shader Packs → pick it
 
 ## Profiles
 
-Defaults are intentionally **minimal** so the game stays fully playable.
-Switch directly in the Iris settings menu:
+The default is intentionally mild — the game should stay playable. Switch profiles in the
+Iris settings menu:
 
-- **Minimal** (default) — only static + light floaters
-- **Screening** — split-screen comparison for testing children
-- **Mild** / **Moderate** / **Severe** — progressive phenotypes
-- **Static Only** — visual snow without the syndrome (~4 % of patients)
+- **Minimal** (default) — static and light floaters only
+- **Screening** — vertical split-screen: affected left, unaffected right
+- **Mild** / **Moderate** / **Severe** — progressive symptom severity
+- **Static Only** — static without the other symptoms (~4 % of patients present this way)
 - **HPPD** — hallucinogen-persisting variant with colored static
 
-## Screening Guide for Parents
+## Screening guide for parents
 
-If you suspect your child has VSS but doesn't realize their own
-perception is atypical:
+VSS is often missed in kids because they have nothing to compare against. The Screening
+profile can help surface this:
 
-1. Have your child play Minecraft normally
-2. Activate the **Screening** profile — the screen splits vertically
+1. Let your child play Minecraft normally for a bit
+2. Switch to the **Screening** profile — the screen splits vertically
 3. Ask: *"Does one half look different from the other?"*
-4. If the child answers "no" or finds the effect side "more normal" —
-   this is a possible indicator of VSS
+4. If they say no, or that the static side looks more normal — that's worth following up
 
-> **Not a medical diagnostic instrument.** If you suspect VSS, please
-> consult a neuro-ophthalmologist. The ICHD-3 diagnosis requires more
-> than 3 months of persistent symptoms, at least 2 of 4 additional
-> symptoms, plus clinical evaluation excluding other causes.
+> **This is not a diagnostic tool.** A proper VSS diagnosis needs a neuro-ophthalmologist,
+> clinical exclusion of other causes, and at least 3 months of persistent symptoms. Use this
+> only as a conversation starter, not as a result.
 
 ## For Developers
 
-3-tier test pipeline:
-
 ```bash
-# Tier 1 — Static linter (seconds)
+# Tier 1 — linter, runs in seconds
 python3 test/tier1-lint/lint.py shaders/
 
-# Tier 2 — Headless Iris integration (local, Docker)
+# Tier 2 — headless Iris test (needs Docker)
 docker build -t iris-test test/tier2-integration/
 docker run --rm -v "$PWD:/shader-mount:ro" iris-test
 
-# Tier 3 — CI matrix across multiple Iris versions
-# runs automatically via .github/workflows/iris-compat.yml
+# Tier 3 — CI matrix across Iris versions, runs on push
+# see .github/workflows/iris-compat.yml
 ```
 
-See [CLAUDE.md](CLAUDE.md) for architecture, Iris gotchas, and code
-conventions; [CONTRIBUTING.md](CONTRIBUTING.md) for the PR workflow.
+Architecture, Iris-specific gotchas, and conventions are in [CLAUDE.md](CLAUDE.md).
+PR workflow is in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Clinical Sources
+## If you have VSS
 
-- Schankin C. et al. (2014). *Visual snow — A new disease entity distinct from migraine aura.* Brain.
-- Puledda F., Schankin C., Goadsby P. (2020). *Visual snow syndrome — A clinical and phenotypical description of 1,100 cases.* Neurology.
-- Hepschke J. et al. (2021). *Short-wave sensitive ("blue") cone activation is an aggravating factor for visual snow symptoms.* Front. Neurol.
-- Eren O. et al. (2019). *Quantification of photophobia in visual snow syndrome.*
-- Martins Silva E., Puledda F. (2023). *Visual snow syndrome and migraine — A review.* Eye.
-- Ayesha A. et al. (2025). *Diagnostic and management strategies of visual snow syndrome.* Eye Brain.
+If this shader looks like your normal vision, you're not alone. A few places to start:
+
+- **[Visual Snow Initiative — Find a Doctor](https://www.visualsnowinitiative.org/find-a-doctor/)**
+  — directory of specialists who know VSS and won't dismiss you
+- **[VSI Patient Community](https://www.visualsnowinitiative.org/community/)**
+  — connect with others who live with it
+- **[Visual Snow Initiative](https://www.visualsnowinitiative.org/)** — general info,
+  current research, and a contact form if you want to participate in studies
+
+A formal diagnosis goes through a neuro-ophthalmologist. Bring the ICHD-3 criteria
+(static + 2 of 4 additional symptoms, 3+ months) if you're not being taken seriously.
+
+## Visual Snow Initiative
+
+The [Visual Snow Initiative](https://www.visualsnowinitiative.org/) is a nonprofit (founded
+2018) that funds VSS research and pushes for clinical recognition. They got VSS its own ICD
+codes, which matters for diagnosis and insurance. They also run a patient community, a
+Find-a-Doctor directory, and a desktop Visual Snow Simulator if you want to try the
+perception without playing Minecraft.
+
+If you work in neurology or ophthalmology and want to contribute research, their website
+has a submission process.
+
+## Clinical sources
+
+- Schankin C., Maniyar F., Digre K., Goadsby P. (2014). *'Visual snow' – a disorder distinct from persistent migraine aura.* Brain 137(5):1419–1428. [doi:10.1093/brain/awu050](https://doi.org/10.1093/brain/awu050)
+- Puledda F., Schankin C., Goadsby P. (2020). *Visual snow syndrome: A clinical and phenotypical description of 1,100 cases.* Neurology 94(6):e564–e574. [doi:10.1212/WNL.0000000000008909](https://doi.org/10.1212/WNL.0000000000008909)
+- Hepschke J., Martin P., Fraser C. (2021). *Short-wave sensitive ("blue") cone activation is an aggravating factor for visual snow symptoms.* Front. Neurol. 12:697923. [doi:10.3389/fneur.2021.697923](https://doi.org/10.3389/fneur.2021.697923)
+- Eren O., Ruscheweyh R., Straube A., Schankin C. (2019). *Quantification of photophobia in visual snow syndrome: A case-control study.* Cephalalgia 40(4):393–398. [doi:10.1177/0333102419896780](https://doi.org/10.1177/0333102419896780)
+- Schankin C., Maniyar F., Chou D., Eller M., Sprenger T. (2020). *Structural and functional footprint of visual snow syndrome.* Brain 143(4):1106–1113. [doi:10.1093/brain/awaa053](https://doi.org/10.1093/brain/awaa053)
+- Martins Silva E., Puledda F. (2023). *Visual snow syndrome and migraine: a review.* Eye 37(12):2374–2378. [doi:10.1038/s41433-023-02435-w](https://doi.org/10.1038/s41433-023-02435-w)
+- Ayesha A., Riehle C., Leishangthem L. (2025). *Diagnostic and management strategies of visual snow syndrome: Current perspectives.* Eye Brain 17:1–11. [doi:10.2147/EB.S418923](https://doi.org/10.2147/EB.S418923)
+
+## Built with AI
+
+Neither of us has a background in GLSL or shader development. We built this entirely with
+AI assistance — we provided the direction, the clinical research, and the reason it exists.
+The AI wrote the shader code. We're mentioning this openly because we think it's honest,
+and because it might encourage others who have something meaningful to build but don't have
+the technical background to just start anyway.
 
 ## License
 
-[MIT](LICENSE) — free to use, modify, and redistribute.
+[MIT](LICENSE)
