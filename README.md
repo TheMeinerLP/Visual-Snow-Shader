@@ -134,11 +134,13 @@ has a submission process.
 
 ## Built with AI
 
-Neither of us has a background in GLSL or shader development. We built this entirely with
-AI assistance — we provided the direction, the clinical research, and the reason it exists.
-The AI wrote the shader code. We're mentioning this openly because we think it's honest,
-and because it might encourage others who have something meaningful to build but don't have
-the technical background to just start anyway.
+Neither of us has a background in GLSL or shader development specifically. We built this
+with AI assistance — we provided the direction, the clinical research, and the reason it
+exists. The AI wrote the shader code. We do have a technical background and understand what
+the code does; we just didn't have the GLSL domain knowledge to write it from scratch
+ourselves. We're mentioning this openly because we think it's honest, and because it might
+encourage others who have something meaningful to build but are missing one specific piece
+of expertise to just start anyway.
 
 ## License
 
