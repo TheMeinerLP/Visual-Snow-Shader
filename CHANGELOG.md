@@ -5,6 +5,13 @@ All notable changes to this project.
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 versioning: [Semver](https://semver.org/).
 
+## [0.2.1](https://github.com/TheMeinerLP/Visual-Snow-Shader/compare/v0.2.0...v0.2.1) (2026-04-26)
+
+
+### ### Fixed
+
+* shim uniform redefinitions and release ZIP not attaching ([#6](https://github.com/TheMeinerLP/Visual-Snow-Shader/issues/6)) ([5525e8a](https://github.com/TheMeinerLP/Visual-Snow-Shader/commit/5525e8a730964930005b70825a3979dc3fff3459))
+
 ## [0.2.0](https://github.com/TheMeinerLP/Visual-Snow-Shader/compare/v0.1.0...v0.2.0) (2026-04-26)
 
 
